@@ -4,18 +4,24 @@ from pyramid.response import Response
 
 from max.MADMax import MADMaxDB, MADMaxCollection
 from max.models import User
-from max.decorators import MaxRequest, MaxResponse
+#from max.decorators import MaxRequest, MaxResponse
 from max.rest.ResourceHandlers import JSONResourceRoot, JSONResourceEntity
 import os
 
 from max.oauth2 import oauth2
 from max.rest.utils import extractPostData
 
+from cornice import Service
+from max.validators import MaxRequest, MaxResponse
 
-@view_config(route_name='user', request_method='GET')
-@MaxResponse
-@MaxRequest
-@oauth2(['widgetcli'])
+people = Service(name='user', path='/people/{username}', description="People")
+
+
+#@view_config(route_name='user', request_method='GET')
+#@MaxResponse
+#@MaxRequest
+#@oauth2(['widgetcli'])
+@people.get(validators=MaxRequest)
 def getUser(context, request):
     """
     """
@@ -23,9 +29,10 @@ def getUser(context, request):
     return handler.buildResponse()
 
 
-@view_config(route_name='user', request_method='POST', permission='operations')
-@MaxResponse
-@MaxRequest
+#@view_config(route_name='user', request_method='POST', permission='operations')
+#@MaxResponse
+#@MaxRequest
+@people.post(validators=MaxRequest)
 def addUser(context, request):
     """
     """
@@ -67,10 +74,11 @@ def getUserAvatar(context, request):
     return image
 
 
-@view_config(route_name='user', request_method='PUT')
-@MaxResponse
-@MaxRequest
-@oauth2(['widgetcli'])
+#@view_config(route_name='user', request_method='PUT')
+#@MaxResponse
+#@MaxRequest
+#@oauth2(['widgetcli'])
+@people.put(validators=MaxRequest)
 def ModifyUser(context, request):
     """
     """
@@ -81,7 +89,7 @@ def ModifyUser(context, request):
     return handler.buildResponse()
 
 
-@view_config(route_name='user', request_method='DELETE')
+#@view_config(route_name='user', request_method='DELETE')
 def DeleteUser(context, request):
     """
     """

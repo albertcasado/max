@@ -12,6 +12,7 @@ requires = [
     'pyramid_tm',
     'pyramid_debugtoolbar',
     'pyramid_who',
+    'cornice',
     'pymongo',
     'rfc3339',
     'requests',

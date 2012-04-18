@@ -4,6 +4,9 @@ from pyramid.session import UnencryptedCookieSessionFactoryConfig
 from pyramid_who.whov2 import WhoV2AuthenticationPolicy
 from pyramid.authorization import ACLAuthorizationPolicy
 
+from cornice.validators import DEFAULT_FILTERS
+
+#from max.validators import MaxRequest
 from max.resources import Root, loadMAXSettings
 from max.rest.resources import RESOURCES
 
@@ -51,6 +54,10 @@ def main(global_config, **settings):
     # Configure routes based on resources defined in RESOURCES
     for name, properties in RESOURCES.items():
         config.add_route(name, properties.get('route'))
+
+    # Cornice related config
+    config.include("cornice")
+    #DEFAULT_FILTERS.append(MaxRequest)
 
     config.scan('max', ignore='max.tests')
 

@@ -1,6 +1,6 @@
 OAUTH_RESOURCES = {
 'users': {'route': '/people'},
-'user': {'route': '/people/{username}'},
+#'user': {'route': '/people/{username}'},
 'avatar': {'route': '/people/{username}/avatar'},
 'user_activities': {'route': '/people/{username}/activities'},
 'timeline': {'route': '/people/{username}/timeline'},
